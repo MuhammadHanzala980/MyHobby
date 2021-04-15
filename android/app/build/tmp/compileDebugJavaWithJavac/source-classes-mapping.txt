@@ -1,0 +1,14 @@
+com/myhobbycourses/BuildConfig.java
+ com.myhobbycourses.BuildConfig
+com/myhobbycourses/MainApplication.java
+ com.myhobbycourses.MainApplication
+ com.myhobbycourses.MainApplication$1
+com/myhobbycourses/ReactNativeFlipper.java
+ com.myhobbycourses.ReactNativeFlipper
+ com.myhobbycourses.ReactNativeFlipper$1
+ com.myhobbycourses.ReactNativeFlipper$2
+ com.myhobbycourses.ReactNativeFlipper$2$1
+com/myhobbycourses/MainActivity.java
+ com.myhobbycourses.MainActivity
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList

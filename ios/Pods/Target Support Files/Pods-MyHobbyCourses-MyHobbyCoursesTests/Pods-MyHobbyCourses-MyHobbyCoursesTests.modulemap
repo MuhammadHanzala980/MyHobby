@@ -1,0 +1,6 @@
+module Pods_MyHobbyCourses_MyHobbyCoursesTests {
+  umbrella header "Pods-MyHobbyCourses-MyHobbyCoursesTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
