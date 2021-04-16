@@ -7,9 +7,7 @@
 // import { GetStart } from "./src";
 // import { createStackNavigator } from '@react-navigation/stack';
 
-
 // const Stack = createStackNavigator();
-
 
 // const App = () => {
 
@@ -20,7 +18,6 @@
 //       StatusBar.setTranslucent(true);
 //     }, []),
 //   );
-
 
 //   return (
 //     <Stack.Navigator>
@@ -40,34 +37,27 @@
 
 // export default App;
 
-
-
-
-
-
-
-
-
-
-import * as React from 'react';
-import { Button, View, StatusBar, SafeAreaView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { GetStart, SignIn ,Signup, Home} from "./src";
-
-
+import * as React from "react";
+import { Button, View, StatusBar, SafeAreaView } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { GetStart, SignIn, Signup, Home } from "./src";
+import { Provider } from "react-redux";
+import Store from "./src/store";
 
 const Stack = createStackNavigator();
-const options = { headerShown: false, headerTitle: null }
+const options = { headerShown: false, headerTitle: null };
 
 function MyStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen options={options} name="GetStart" component={GetStart} />
-      <Stack.Screen options={options} name="SignIn" component={SignIn} />
-      <Stack.Screen options={options} name="Signup" component={Signup} />
-      <Stack.Screen options={options} name="Home" component={Home} />
-    </Stack.Navigator>
+    <Provider store={Store}>
+      <Stack.Navigator>
+        <Stack.Screen options={options} name="GetStart" component={GetStart} />
+        <Stack.Screen options={options} name="SignIn" component={SignIn} />
+        <Stack.Screen options={options} name="Signup" component={Signup} />
+        <Stack.Screen options={options} name="Home" component={Home} />
+      </Stack.Navigator>
+    </Provider>
   );
 }
 
@@ -75,14 +65,14 @@ export default function App() {
   React.useEffect(
     React.useCallback(() => {
       StatusBar.setBarStyle("dark-content");
-      Platform.OS === 'android' && StatusBar.setBackgroundColor('transparent');
+      Platform.OS === "android" && StatusBar.setBackgroundColor("transparent");
       StatusBar.setTranslucent(true);
-    }, []),
+    }, [])
   );
 
   return (
-      <NavigationContainer>
-        <MyStack />
-      </NavigationContainer>
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
   );
 }

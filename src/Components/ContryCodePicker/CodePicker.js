@@ -75,7 +75,7 @@ const BgColorInput = ({ onChange, value, placeholder, rightIcon }) => {
             </View>
             <TextInput
                 onChangeText={onChange}
-                value={"0313 2020787"} placeholder={placeholder}
+                value='' placeholder={placeholder}
                 placeholderTextColor={INPUTCOLOR}
                 style={styles.textInput} />
         </View>

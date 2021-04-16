@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, ScrollView, StatusBar, TouchableOpacity, Text } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { Button, AppLogo, BgColorInput, ContryCodePicker } from "../../Components/index";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { signUpStudent } from "../../store/action";
+const Signup = (props) => {
+  const [userName, setUserName] = useState("");
 
-const Signup = ({ navigation }) => {
+  function signUp() {
+    const userdata = {
+      name: "Guesst3",
+      mail: "testUser3@gmail.com",
+      field_customer_or_educator: {
+        und: "0",
+      },
+      pass: "11223344!",
+      "pass[pass2]": "11223344!",
+      "field_term_condition[und]": "yes",
+    };
+
+    props.actions
+      .signUpStudent(userdata)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -12,7 +36,7 @@ const Signup = ({ navigation }) => {
         </View>
         <View style={styles.whiteBGContainer}>
           <View style={styles.tabContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate("SignIn")} activeOpacity={0.3} style={styles.signInTabButton}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("SignIn")} activeOpacity={0.3} style={styles.signInTabButton}>
               <Text style={[styles.simpleText, { color: "#15A89B", fontWeight: "bold" }]}>Sign In</Text>
             </TouchableOpacity>
             <View style={styles.tabSaprater} />
@@ -22,10 +46,10 @@ const Signup = ({ navigation }) => {
           </View>
           <View>
             <Text style={styles.helloText}>Hello!</Text>
-            <Text style={styles.accountText}>Create an account and continue</Text>
+            <Text style={styles.accountText}>Create an account as a student and continue</Text>
           </View>
           <View style={styles.inpuContainer}>
-            <BgColorInput placeholder={"User Name"} />
+            <BgColorInput onChangeText={(text) => setUserName(text)} placeholder={"User Name"} />
           </View>
           <View style={styles.inpuContainer}>
             <BgColorInput placeholder={"Email"} />
@@ -35,11 +59,11 @@ const Signup = ({ navigation }) => {
           </View>
 
           <View style={{ marginTop: hp("4%"), paddingHorizontal: wp("5%") }}>
-            <Button onPress={() => navigation.navigate("Home")} textColor="#fff" bgColor="#FC3480" buttonText="Sign In" />
+            <Button onPress={() => signUp()} textColor="#fff" bgColor="#FC3480" buttonText="Sign Up" />
           </View>
           <TouchableOpacity style={{ flexDirection: "row", alignSelf: "center", alignItems: "center", marginTop: hp("2%") }} activeOpacity={0.5}>
-            <Text style={[styles.simpleText, { color: "#A1ABBF" }]}>You don't have an accont? </Text>
-            <Text style={[styles.simpleText, { color: "#15A89B" }]}>Sign Up</Text>
+            <Text style={[styles.simpleText, { color: "#A1ABBF" }]}>Already have an accont? </Text>
+            <Text style={[styles.simpleText, { color: "#15A89B" }]}>Sign In</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -117,4 +141,22 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Signup;
+const mapDispatchToProps = (dispatchEvent) => {
+  return {
+    actions: bindActionCreators(
+      {
+        signUpStudent,
+      },
+      dispatchEvent
+    ),
+  };
+};
+const mapStateToProps = (state) => {
+  return {
+    item: state,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+
+// export default Signup;
